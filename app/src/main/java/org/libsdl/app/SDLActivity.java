@@ -60,8 +60,8 @@ import java.util.Locale;
 public class SDLActivity extends Activity implements View.OnSystemUiVisibilityChangeListener {
     private static final String TAG = "SDL";
     private static final int SDL_MAJOR_VERSION = 2;
-    private static final int SDL_MINOR_VERSION = 32;
-    private static final int SDL_MICRO_VERSION = 8;
+    private static final int SDL_MINOR_VERSION = 30;
+    private static final int SDL_MICRO_VERSION = 1;
 /*
     // Display InputType.SOURCE/CLASS of events and devices
     //
@@ -709,7 +709,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                     // Start up the C app thread and enable sensor input for the first time
                     // FIXME: Why aren't we enabling sensor input at start?
 
-                    mSDLThread = new Thread(new SDLMain(), "SDLThread");
+                    mSDLThread = new Thread(new ThreadGroup("SDLThreadGroup"), new SDLMain(), "SDLThread", 5 * 1024 * 1024);
                     mSurface.enableSensor(Sensor.TYPE_ACCELEROMETER, true);
                     mSDLThread.start();
 
